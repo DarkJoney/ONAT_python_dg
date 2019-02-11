@@ -7,7 +7,7 @@ is_waiting = True
 is_testing = False
 person_list = []
 correct_answers = []
-vopros_num = 0
+vopros_num = 1
 wrong_answer = []
 while True:
 
@@ -23,13 +23,19 @@ while True:
         is_testing = True
 
     while is_testing is True:
-        print("Task #" +vopros_num)
+        print("Task #" + str(vopros_num))
         a = random.randint(1, 10)
         b = random.randint(1, 10)
-        testVal = random.randint(1, 4)
+        testVal = random.randint(0, 3)
         signs = ["*","/","+","-"]
 
         print("What's the result of" + " " + str(a) + signs[testVal] + str(b) + "?")
+        taskResult = eval(str(a) +  signs[testVal] + str(b))
         userOtvet = input()
+        if userOtvet == str(taskResult):
+            print("pizdato")
+        else:
+            print ("pizdec")
+
         vopros_num = vopros_num +1
 
