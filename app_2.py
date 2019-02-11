@@ -7,6 +7,7 @@ is_waiting = True
 is_testing = False
 person_list = []
 correct_answers = []
+vopros_num = 0
 wrong_answer = []
 while True:
 
@@ -22,6 +23,7 @@ while True:
         is_testing = True
 
     while is_testing is True:
+
         a = random.randint(1, 10)
         b = random.randint(1, 10)
         testVal = random.randint(1, 4)
@@ -29,3 +31,4 @@ while True:
 
         print("What's the result of" + " " + str(a) + signs[testVal] + str(b) + "?")
         userOtvet = input()
+        vopros_num = vopros_num +1
