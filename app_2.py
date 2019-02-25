@@ -16,9 +16,6 @@ while True:
 
     admin_name = "Vorobienko Petr Petrovich"
     while is_waiting is True:
-        vopros_num = 0
-        ca_counter = 0
-        wa_counter = 0
         print("Hello, " + admin_name)
 
         print("Please register person for testing: ")
@@ -44,7 +41,7 @@ while True:
         signs = ["*","/","+","-"]
 
         if vopros_num <= 3:
-            print("Task #" + str(vopros_num) + " from 3")
+            print("Task #" + str(vopros_num) + " from 4")
             print("What's the result of" + " " + str(a) + signs[testVal] + str(b) + "?")
             taskResult = eval(str(a) +  signs[testVal] + str(b))
             userOtvet = input()
@@ -63,23 +60,25 @@ while True:
             print("Wrong answers: " + str(wa_counter))
 
             print("Do you want to continue? Y/N")
-            if input() == str("Y"):
+            inputcheck = input()
+            if inputcheck == str("Y"):
                 is_testing = False
                 is_waiting = True
                 is_results = False
                 current_person = current_person + 1
                 person_counter = person_counter + 1
-            elif input() == str("N"):
+            elif inputcheck == str("N"):
                 is_testing = False
                 is_waiting = False
                 is_results = True
 
-        while is_results is True:
-            print("DEBUG: CHECK")
-            for k in person_list:
-                print(k)
+            #else:
+               # is_testing = False
+               # is_waiting = False
+              #  is_results = True
+              #  current_person = current_person + 1
+              #  person_counter = person_counter + 1
+              #  print("Press Enter to view results")
 
-            data = zip(person_list, correct_answers, wrong_answer)
-            print("Results of testing : ")
-            print(data)
-
+        if is_results is True:
+            print("debug")
