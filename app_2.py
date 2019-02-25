@@ -5,37 +5,81 @@ current_person = 0
 user_mode_input = ""
 is_waiting = True
 is_testing = False
+is_results = False
 person_list = []
 correct_answers = []
+ca_counter = 0
+wa_counter = 0
 vopros_num = 1
 wrong_answer = []
 while True:
 
     admin_name = "Vorobienko Petr Petrovich"
     while is_waiting is True:
+        vopros_num = 0
+        ca_counter = 0
+        wa_counter = 0
         print("Hello, " + admin_name)
-        print("Please register person for testing: ")
-        person_list.append(input())
-        #append drugie soprovojdenie
-        print(person_list[person_counter] + " is registered")
 
+        print("Please register person for testing: ")
+        name = input()
+        if name not in person_list:
+            person_list.append(name)
+        else:
+            print("He is already in the list")
+            break
+
+        print(person_counter)
+        print(person_list[person_counter] + " is registered")
+        is_results = False
         is_waiting = False
         is_testing = True
 
     while is_testing is True:
-        print("Task #" + str(vopros_num))
+
+
         a = random.randint(1, 10)
         b = random.randint(1, 10)
         testVal = random.randint(0, 3)
         signs = ["*","/","+","-"]
 
-        print("What's the result of" + " " + str(a) + signs[testVal] + str(b) + "?")
-        taskResult = eval(str(a) +  signs[testVal] + str(b))
-        userOtvet = input()
-        if userOtvet == str(taskResult):
-            print("pizdato")
-        else:
-            print ("pizdec")
+        if vopros_num <= 3:
+            print("Task #" + str(vopros_num) + " from 3")
+            print("What's the result of" + " " + str(a) + signs[testVal] + str(b) + "?")
+            taskResult = eval(str(a) +  signs[testVal] + str(b))
+            userOtvet = input()
+            if userOtvet == str(taskResult):
+                print("pizdato")
+                ca_counter = ca_counter+1
+            else:
+                print ("pizdec")
+                wa_counter = wa_counter+1
+            vopros_num = vopros_num +1
 
-        vopros_num = vopros_num +1
+        if vopros_num == 4:
+            correct_answers.append(ca_counter)
+            wrong_answer.append(wa_counter)
+            print("Correct answers: " + str(ca_counter))
+            print("Wrong answers: " + str(wa_counter))
+
+            print("Do you want to continue? Y/N")
+            if input() == str("Y"):
+                is_testing = False
+                is_waiting = True
+                is_results = False
+                current_person = current_person + 1
+                person_counter = person_counter + 1
+            elif input() == str("N"):
+                is_testing = False
+                is_waiting = False
+                is_results = True
+
+        while is_results is True:
+            print("DEBUG: CHECK")
+            for k in person_list:
+                print(k)
+
+            data = zip(person_list, correct_answers, wrong_answer)
+            print("Results of testing : ")
+            print(data)
 
