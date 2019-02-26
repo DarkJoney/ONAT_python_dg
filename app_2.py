@@ -16,6 +16,9 @@ while True:
 
     admin_name = "Vorobienko Petr Petrovich"
     while is_waiting is True:
+        vopros_num = 0
+        ca_counter = 0
+        wa_counter = 0
         print("Hello, " + admin_name)
 
         print("Please register person for testing: ")
@@ -82,3 +85,13 @@ while True:
 
         if is_results is True:
             print("debug")
+            print(person_list)
+            print(correct_answers)
+            print(wrong_answer)
+            print("NAME     CORRECT     WRONG")
+
+
+            for x in person_list:
+                for v in correct_answers:
+                    for c in wrong_answer:
+                        print(x, v, c)
