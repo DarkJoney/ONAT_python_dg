@@ -8,6 +8,7 @@ is_testing = False
 is_results = False
 person_list = []
 correct_answers = []
+ratios_list = []
 ca_counter = 0
 wa_counter = 0
 vopros_num = 1
@@ -37,24 +38,23 @@ while True:
 
     while is_testing is True:
 
-
         a = random.randint(1, 10)
         b = random.randint(1, 10)
         testVal = random.randint(0, 3)
-        signs = ["*","/","+","-"]
+        signs = ["*", "/", "+", "-"]
 
         if vopros_num <= 3:
             print("Task #" + str(vopros_num) + " from 4")
             print("What's the result of" + " " + str(a) + signs[testVal] + str(b) + "?")
-            taskResult = eval(str(a) +  signs[testVal] + str(b))
+            taskResult = eval(str(a) + signs[testVal] + str(b))
             userOtvet = input()
             if userOtvet == str(taskResult):
-                print("pizdato")
-                ca_counter = ca_counter+1
+                print("Correct!")
+                ca_counter = ca_counter + 1
             else:
-                print ("pizdec")
-                wa_counter = wa_counter+1
-            vopros_num = vopros_num +1
+                print("Wrong!")
+                wa_counter = wa_counter + 1
+            vopros_num = vopros_num + 1
 
         if vopros_num == 4:
             correct_answers.append(ca_counter)
@@ -75,23 +75,22 @@ while True:
                 is_waiting = False
                 is_results = True
 
-            #else:
-               # is_testing = False
-               # is_waiting = False
-              #  is_results = True
-              #  current_person = current_person + 1
-              #  person_counter = person_counter + 1
-              #  print("Press Enter to view results")
+            # else:
+            # is_testing = False
+            # is_waiting = False
+            #  is_results = True
+            #  current_person = current_person + 1
+            #  person_counter = person_counter + 1
+            #  print("Press Enter to view results")
 
         if is_results is True:
             print("debug")
             print(person_list)
             print(correct_answers)
             print(wrong_answer)
-            print("NAME     CORRECT     WRONG")
+            print("# NAME   C/W")
 
-
-            for x in person_list:
-                for v in correct_answers:
-                    for c in wrong_answer:
-                        print(x, v, c)
+            list_marker = 1
+            for out, out1 in zip(person_list, zip(correct_answers, wrong_answer)):
+                print(list_marker,out, '\t', out1)
+                list_marker = list_marker+1
