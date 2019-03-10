@@ -88,9 +88,14 @@ while True:
             print(person_list)
             print(correct_answers)
             print(wrong_answer)
-            print("# NAME   C/W")
+            print("#    NAME        C/W")
 
             list_marker = 1
             for out, out1 in zip(person_list, zip(correct_answers, wrong_answer)):
-                print(list_marker,out, '\t', out1)
+                print(list_marker, '\t', out, '\t', out1)
                 list_marker = list_marker+1
+            temp_largest = 0
+            for x in range(len(correct_answers)):
+                if correct_answers[x] >= correct_answers[x-1]:
+                    temp_largest = x
+            print("Best scored person is: " + person_list[temp_largest] + "with score:" + correct_answers[temp_largest])
