@@ -25,11 +25,11 @@ def ac_rep(phonen):
 def call_data(phonen):
     print("Data for: " + phonen)
     if "reccall" in reg_data[phonen]:
-        print("Last outcoming call: " + str(reg_data[phonen]["reccall"]) + " at " + str(reg_data[phonen]["lastrecdata"]))
+        print("Last incoming call: " + str(reg_data[phonen]["reccall"]) + " at " + str(reg_data[phonen]["lastrecdata"]))
     else:
         print("no calls avaliable")
     if "lastcall" in reg_data[phonen]:
-        print("Last incoming call: " + str(reg_data[phonen]["lastcall"]) + " at " + str(reg_data[phonen]["lastcalldata"]))
+        print("Last outcoming  call: " + str(reg_data[phonen]["lastcall"]) + " at " + str(reg_data[phonen]["lastcalldata"]))
     else:
         print("no calls avaliable")
 
