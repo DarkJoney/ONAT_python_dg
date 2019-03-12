@@ -24,9 +24,14 @@ def ac_rep(phonen):
 
 def call_data(phonen):
     print("Data for: " + phonen)
-    print("Last outcoming call: " + str(reg_data[phonen]["reccall"]) + " at " + str(reg_data[phonen]["lastrecdata"]))
-    print("Last incoming call: " + str(reg_data[phonen]["lastcall"]) + " at " + str(reg_data[phonen]["lastcalldata"]))
-
+    if "reccall" in reg_data[phonen]:
+        print("Last outcoming call: " + str(reg_data[phonen]["reccall"]) + " at " + str(reg_data[phonen]["lastrecdata"]))
+    else:
+        print("no calls avaliable")
+    if "lastcall" in reg_data[phonen]:
+        print("Last incoming call: " + str(reg_data[phonen]["lastcall"]) + " at " + str(reg_data[phonen]["lastcalldata"]))
+    else:
+        print("no calls avaliable")
 
 def sub_data(usr_num):
     print("Data for: " + usr_num)
@@ -39,7 +44,7 @@ def sub_reg():
     print("Input your phone number: ")
     phonen = input()
     reg_acc.append(phonen)
-    print(phonen + "is added")
+    print(phonen + " is added")
     print("Let's input an additional information. ")
     print("Input name:")
     name = input()
@@ -61,8 +66,8 @@ def add_money(phonen):
     if "money" in reg_data[phonen]:
         reg_data[phonen]["money"] = reg_data[phonen]["money"] + money2add
         reg_data[phonen]["data"] = datetime.datetime.now()
-        if "payAM" in reg_data[phonen]:
-            reg_data[phonen]["payam"] = reg_data[phonen["payam"]] + 1
+
+        reg_data[phonen]["payam"] = reg_data[phonen]["payam"] + 1
     else:
         reg_data[phonen]["money"] = money2add
         reg_data[phonen]["payam"] = 1
