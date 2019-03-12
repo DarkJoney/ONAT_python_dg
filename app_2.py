@@ -11,16 +11,22 @@ correct_answers = []
 ratios_list = []
 ca_counter = 0
 wa_counter = 0
-vopros_num = 1
+ques_num = 1
 wrong_answer = []
 
 
+def calcRatio():
+    for x in range(len(person_list)):
+        ratios_list.append((correct_answers[x]/4)*100)
+
+
+
 def print_res():
-    print("#    NAME        C/W")
+    print("#    NAME    C/W             ratio")
 
     list_marker = 1
     for out, out1 in zip(person_list, zip(correct_answers, wrong_answer)):
-        print(list_marker, '\t', out, '\t', out1)
+        print(list_marker, '\t', out, '\t', out1, '\t', '\t', ratios_list[list_marker-1])
         list_marker = list_marker + 1
     temp_largest = 0
     for x in range(len(correct_answers)):
@@ -29,15 +35,16 @@ def print_res():
     print("Best scored person is: " + str(person_list[temp_largest]) + " with score:" + str(correct_answers[temp_largest]))
 
 
-
+admin_name = "Vorobienko Petr Petrovich"
+print("Hello, " + admin_name)
 while True:
 
-    admin_name = "Vorobienko Petr Petrovich"
+
     while is_waiting is True:
-        vopros_num = 0
+        ques_num = 0
         ca_counter = 0
         wa_counter = 0
-        print("Hello, " + admin_name)
+
 
         print("Please register person for testing: ")
         name = input()
@@ -60,8 +67,8 @@ while True:
         testVal = random.randint(0, 3)
         signs = ["*", "/", "+", "-"]
 
-        if vopros_num <= 3:
-            print("Task #" + str(vopros_num) + " from 4")
+        if ques_num <= 3:
+            print("Task #" + str(ques_num) + " from 4")
             print("What's the result of" + " " + str(a) + signs[testVal] + str(b) + "?")
             taskResult = eval(str(a) + signs[testVal] + str(b))
             userOtvet = input()
@@ -71,9 +78,9 @@ while True:
             else:
                 print("Wrong!")
                 wa_counter = wa_counter + 1
-            vopros_num = vopros_num + 1
+            ques_num = ques_num + 1
 
-        if vopros_num == 4:
+        if ques_num == 4:
             correct_answers.append(ca_counter)
             wrong_answer.append(wa_counter)
             print("Correct answers: " + str(ca_counter))
@@ -101,5 +108,6 @@ while True:
             #  print("Press Enter to view results")
 
         if is_results is True:
+            calcRatio()
             print_res()
 
