@@ -15,10 +15,9 @@ ques_num = 1
 wrong_answer = []
 
 
-def calcRatio():
+def calc_ratio():
     for x in range(len(person_list)):
         ratios_list.append((correct_answers[x]/4)*100)
-
 
 
 def print_res():
@@ -44,8 +43,6 @@ while True:
         ques_num = 0
         ca_counter = 0
         wa_counter = 0
-
-
         print("Please register person for testing: ")
         name = input()
         if name not in person_list:
@@ -71,8 +68,8 @@ while True:
             print("Task #" + str(ques_num) + " from 4")
             print("What's the result of" + " " + str(a) + signs[testVal] + str(b) + "?")
             taskResult = eval(str(a) + signs[testVal] + str(b))
-            userOtvet = input()
-            if userOtvet == str(taskResult):
+            userInput = input()
+            if userInput == str(taskResult):
                 print("Correct!")
                 ca_counter = ca_counter + 1
             else:
@@ -108,6 +105,6 @@ while True:
             #  print("Press Enter to view results")
 
         if is_results is True:
-            calcRatio()
+            calc_ratio()
             print_res()
 
