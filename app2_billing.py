@@ -43,20 +43,24 @@ def sub_data(usr_num):
 def sub_reg():
     print("Input your phone number: ")
     phonen = input()
-    reg_acc.append(phonen)
-    print(phonen + " is added")
-    print("Let's input an additional information. ")
-    print("Input name:")
-    name = input()
-    print("Input surname:")
-    surname = input()
+    if phonen not in reg_acc:
+        reg_acc.append(phonen)
+        print(phonen + " is added")
+        print("Let's input an additional information. ")
+        print("Input name:")
+        name = input()
+        print("Input surname:")
+        surname = input()
 
-    reg_data[phonen] = {
-        "name": name,
-        "surname": surname,
-        "numcall": 0
-    }
-    print(reg_data[phonen]["name"] + " is registered  in system")
+        reg_data[phonen] = {
+            "name": name,
+            "surname": surname,
+            "numcall": 0
+        }
+        print(reg_data[phonen]["name"] + " is registered  in system")
+    else:
+        print("He is already registered in the system")
+
 
 
 def add_money(phonen):
