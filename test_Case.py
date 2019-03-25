@@ -11,6 +11,7 @@ class NamesTestingRRR(unittest.TestCase):
         """GGGG"""
         calculated = calc2(6, 7)
         self.assertEqual(calculated, 13)
+        self.as
 
     def test_three_values(self):
         """hhhh"""
