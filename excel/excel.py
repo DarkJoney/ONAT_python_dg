@@ -167,8 +167,9 @@ for i in range(0,len(dumbs)):
 document.add_heading(str(datetime.datetime.now()))
 
 document.save("borjniki.docx")
-print("Message sendibg")
+print("Message sending")
 #pochta
+"""
 to='////'
 fromname='Dmitriy TE'
 fromemail='///'
@@ -189,4 +190,6 @@ mailserver.ehlo()  #again
 mailserver.login('pythonte///11@rambler.ru', '///')
 mailserver.sendmail(fromemail, to, message)
 mailserver.quit()                                 # Выходим
+"""
 print("message sent")
+os.startfile(os.path.join(os.getcwd(), "borjniki.docx"))
