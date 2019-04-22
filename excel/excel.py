@@ -1,5 +1,10 @@
 import openpyxl
-
+from openpyxl.styles import Color, PatternFill, Font, Border
+from openpyxl.styles import colors
+from openpyxl.cell import Cell
+import win32com.client
+import os
+excel = win32com.client.Dispatch("Excel.Application")
 wb = openpyxl.load_workbook('students.xlsx')
 
 print(wb.sheetnames)
@@ -23,6 +28,7 @@ print(groups_list)
 print(groups_id)
 
 ws1 = wb.create_sheet("5.01")
+
 ws2 = wb.create_sheet("5.02")
 ws3 = wb.create_sheet("5.03")
 for i in range(1, 7):
@@ -84,12 +90,57 @@ for i in range(2, ws3.max_row + 1):
 wb.save("students_edit.xlsx")
 
 print("SORTING...")
-
+wb.close()
 temp = 0
+#for i in range(2, ws3.max_row + 1):
+ #   temp = 0
+  #  if int(ws3.cell(row=i, column=7).value) > int(ws3.cell(row=i + 1, column=7).value):
+   #     temp = int(ws3.cell(row=i + 1, column=7).value)
+    #    ws3.cell(row=i + 1, column=7).value = ws3.cell(row=i, column=7).value
+    #    ws3.cell(row=i, column=7).value = temp
+     #   ws3.cell(
+#ws2.auto_filter.ref = ws2.dimensions
+#ws3.auto_filter.ref = ws3.dimensions
+
+
+
+#ws1.auto_filter.ref = "A2:G6"
+#ws1.auto_filter.add_filter_column(0, ["Kiwi", "Apple", "Mango"])
+#ws1.auto_filter.add_sort_condition("B2:B15")
+
+
+wb = excel.Workbooks.Open(os.path.join(os.getcwd(), "students_edit.xlsx"))
+ws1 = wb.Worksheets("5.01")
+ws1.Range('A2:G6').Sort(Key1=ws1.Range('G6'), Order1=2, Orientation=1)
+ws2 = wb.Worksheets("5.02")
+ws2.Range('A2:G6').Sort(Key1=ws2.Range('G6'), Order1=2, Orientation=1)
+ws3 = wb.Worksheets("5.03")
+ws3.Range('A2:G6').Sort(Key1=ws3.Range('G6'), Order1=2, Orientation=1)
+
+wb.Save()
+excel.Application.Quit()
+
+redFill = PatternFill(start_color='FFFF0000', end_color='FFFF0000', fill_type='solid')
+
+wb = openpyxl.load_workbook('students_edit.xlsx')
+ws1 = wb["5.01"]
+ws2 = wb["5.02"]
+ws3 = wb["5.03"]
+dumbs = []
+for i in range(2, ws1.max_row + 1):
+    if ws1.cell(row=i, column=7).value <= 60:
+        ws1.cell(row=i, column=7).fill = redFill
+        dumbs.append(ws1.cell(row=i, column=2).value)
+for i in range(2, ws2.max_row + 1):
+    if ws2.cell(row=i, column=7).value <= 60:
+        ws2.cell(row=i, column=7).fill = redFill
+        dumbs.append(ws2.cell(row=i, column=2).value)
 for i in range(2, ws3.max_row + 1):
-    temp = 0
-    if int(ws3.cell(row=i, column=7).value) > int(ws3.cell(row=i + 1, column=7).value):
-        temp = int(ws3.cell(row=i + 1, column=7).value)
-        ws3.cell(row=i + 1, column=7).value = ws3.cell(row=i, column=7).value
-        ws3.cell(row=i, column=7).value = temp
-        ws3.cell(
+    if ws3.cell(row=i, column=7).value <= 60:
+        ws3.cell(row=i, column=7).fill = redFill
+        dumbs.append(ws3.cell(row=i, column=2).value)
+
+wb.save("students_edit.xlsx")
+
+print(dumbs)
+
