@@ -4,6 +4,11 @@ from openpyxl.styles import colors
 from openpyxl.cell import Cell
 import win32com.client
 import os
+import docx
+from docx import Document
+import datetime
+import  smtplib
+from win32com.client import Dispatch
 excel = win32com.client.Dispatch("Excel.Application")
 wb = openpyxl.load_workbook('students.xlsx')
 
@@ -142,5 +147,46 @@ for i in range(2, ws3.max_row + 1):
 
 wb.save("students_edit.xlsx")
 
+ws4 = wb.create_sheet("Borjniki")
+cntr = 0
+ws4.cell(row=1, column=1).value = "Borjniki"
+for i in range(2, len(dumbs) + 2):
+    ws4.cell(row=i, column=1).value = dumbs[cntr]
+    cntr = cntr+1
+
+wb.save("students_edit.xlsx")
 print(dumbs)
 
+document = Document()
+document.add_heading("Люди - позор академії, на відрахування")
+
+cntr = 0
+for i in range(0,len(dumbs)):
+    paragraph = document.add_paragraph(dumbs[i])
+
+document.add_heading(str(datetime.datetime.now()))
+
+document.save("borjniki.docx")
+print("Message sendibg")
+#pochta
+to='////'
+fromname='Dmitriy TE'
+fromemail='///'
+subject='Тест программы'
+body='Файл отчислений'
+
+message=''
+message+= "To: " + to + "\n"
+message+= "From: \"" + fromname + "\" <" + fromemail + ">\n"
+message+= "Subject: " + subject + "\n"
+message+= "\n"
+message+= body
+
+mailserver = smtplib.SMTP('smtp.rambler.ru', 465)
+mailserver.ehlo()
+mailserver.starttls()
+mailserver.ehlo()  #again
+mailserver.login('pythonte///11@rambler.ru', '///')
+mailserver.sendmail(fromemail, to, message)
+mailserver.quit()                                 # Выходим
+print("message sent")
