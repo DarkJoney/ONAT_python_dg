@@ -1,9 +1,12 @@
 ##file reader
 import os
+import math
 import sys
 dataList = []
 marketList = []
 groupList = []
+inputControl = True
+
 try:
     fh = open('dataGroup.txt', 'r')
     print("File opened.")
@@ -41,15 +44,34 @@ for x in marketList:
         print(str(cindex) + " " + data[x])
         cindex = cindex +1
 
+while inputControl:
 
-print("Input number:")
+    print("Input number:")
 
-target = input()
-if int(target) > int(cindex-1):
-    print("Wrong value! Let's try again.")
-    sys.exit()
+    target = input()
+
+    try:
+        target = int(target)
+    except (TypeError, ValueError):
+        print("Wrong input!")
+    else:
+        if target > int(cindex - 1) or target < 0:
+            print("Wrong value! Let's try again.")
+        else:
+            inputControl = False
+
+
+#target = int(target)
+
+
+
 fh.close()
-f = open("output.txt", "w+")
+print("Enter filename for export:")
+filename = input()
+filename = str(filename)+".txt"
+print(filename)
+
+f = open(filename, "w+")
 for i in range(marketList[int(target)], marketList[int(target)+1]):
     if data[i] is not "$":
         print(data[i])
@@ -57,4 +79,4 @@ for i in range(marketList[int(target)], marketList[int(target)+1]):
 
 f.close()
 print("Finish. Group is exported")
-os.startfile("output.txt")
+os.startfile(filename)
