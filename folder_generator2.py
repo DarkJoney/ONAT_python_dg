@@ -1,19 +1,30 @@
 import os
 
-for kurs in range(1^6):
 
-path = 'D: WStudentsWkurs'+str(kurs) os.makedirs(path) os.makedirs(path+'\\reference') print(path)
+def create_ref(path):
+    f = open(path+"\\reference\\reference.html", 'a')
+    f.write("<h1>Nauchis googlit, blin!</h1>")
+    f.close
 
-open(path+'\\reference\\reference.html	a')
 
-open(path+'\\reference\\readme.txt', 'a') if kurs == 1:
+def create_content(path):
+    os.makedirs(path + '\\install')
+    os.chdir(path + '\\install')
+    os.mkdir('C++')
+    os.mkdir('web')
 
-os.makedirs (path + 'Winstal') os.chdir (path + 'Winstal') os.mkdir('C++') os.mkdir('web') elif kurs == 3:
 
-os.makedirs (path + 'Winstal') os.chdir (path + 'Winstal') os.mkdir('Python') os.mkdir('DB')
+for cur_year in range (1,6):
+    path = "C:\\test\\kurs"+str(cur_year)
+    os.makedirs(path+"\\reference")
 
-else: os.makedirs (path+'Winstal') for group in range(1^7): if group <3:
-
-os.makedirs (path+' W' + 'CS' + '.l.O'+str (group)) elif grou^^
-
-os.makedirs(path + '\\' + 'SE' + '.1.0' + str(group)) else^ os.makedirs(path + '\\' + 'IK' + '.1.0' + str(group))
+    print(path)
+    create_ref(path)
+    open(path + "\\reference\\readme.txt", 'a')
+    if cur_year is 1 or 3:
+        create_content(path)
+    for group in range(1,3):
+        if cur_year is not 5:
+            os.makedirs(path + "\\CS-" + str(cur_year) + ".1.0"+str(group))
+        os.makedirs(path + "\\IK-" + str(cur_year) + ".1.0" + str(group))
+        os.makedirs(path + "\\SE-" + str(cur_year) + ".1.0" + str(group))
