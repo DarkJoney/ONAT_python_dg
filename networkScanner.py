@@ -39,7 +39,7 @@ print("Scan 1 from 3: 192.168.88.x")
 thread1 = Thread(target=scanhome, args=(1, 5))
 thread2 = Thread(target=scanhome, args=(6, 10))
 thread3 = Thread(target=scanhome, args=(11, 20))
-thread4 = Thread(target=scanhome, args=(21, 25))
+thread4 = Thread(target=scanhome, args=(21, 30))
 
 thread1.start()
 thread2.start()
@@ -50,33 +50,6 @@ thread2.join()
 thread3.join()
 thread4.join()
 
-
-
-
-print("Scan 2 from 3: 192.168.0.x")
-"""
-for ping in range(1,99):
-    address = "192.168.0." + str(ping)
-    res = subprocess.call(['ping', '-n', '3', address])
-    if res == 0:
-        print( "ping to", address, "OK")
-        activeIP.append("192.168.0." + str(ping))
-    elif res == 2:
-        print("no response from", address)
-    else:
-        print("ping to", address, "failed!")
-print("Scan 3 from 3: 10.0.0.x")
-for ping in range(1,99):
-    address = "10.0.0." + str(ping)
-    res = subprocess.call(['ping', '-n', '3', address])
-    if res == 0:
-        print( "ping to", address, "OK")
-        activeIP.append("10.0.0." + str(ping))
-    elif res == 2:
-        print("no response from", address)
-    else:
-        print("ping to", address, "failed!")
-        """
 print(activeIP)
 print("Scanning complete. " + str(len(activeIP)) + " found online")
 print("Port scanning start at alive IPs...")
@@ -144,3 +117,39 @@ elif cpus is 12:
 
 
 print(openedport)
+print("enter email pass: ")
+emailpass = input()
+# import necessary packages
+
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+import smtplib
+
+# create message object instance
+msg = MIMEMultipart()
+
+message = str(openedport)
+
+# setup the parameters of the message
+password = emailpass
+msg['From'] = "tinston@ukr.net"
+msg['To'] = "darkjoney@outlook.com"
+msg['Subject'] = "OPENED PORTS"
+
+# add in the message body
+msg.attach(MIMEText(message, 'plain'))
+
+# create server
+server = smtplib.SMTP('smtp.ukr.net: 465')
+
+server.starttls()
+
+# Login Credentials for sending the mail
+server.login(msg['From'], password)
+
+# send the message via the server.
+server.sendmail(msg['From'], msg['To'], msg.as_string())
+
+server.quit()
+
+print("successfully sent email to %s:" % (msg['To']))
